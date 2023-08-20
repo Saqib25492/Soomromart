@@ -1,0 +1,49 @@
+{% extends "authentication/baseauth.html" %}
+
+{% block title %}
+  Contact Us
+{% endblock title %}
+
+{% block bodyforms %}
+
+<main class="float-lg-left form-signin w-50 m-auto">
+    <div>
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+          <strong>{{message}}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+    </div>
+    <form action="contact" method="post">
+        {% csrf_token %}
+      <h1 class="h3 mb-3 fw-normal">Contact Us</h1>
+  
+      <div class="form-floating mt-2">
+        <input type="text" class="form-control" name="name" id="name" placeholder="name@example.com">
+        <label for="email">Name</label>
+      </div>
+
+      <div class="form-floating mt-2">
+        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+        <label for="email">Email</label>
+      </div>
+
+      <div class="mt-2">
+        <textarea name="desc" class="form-control" id="desc" cols="30" rows="6" placeholder="How can I help you!"></textarea>
+      </div>
+
+      <div class="form-floating mt-2">
+        <input  type="tel" class="form-control" name="phone" id="phone" placeholder="Phone">
+        <label for="phone">Phone</label>
+
+      </div>
+
+      <button class="btn btn-primary w-25 py-2 mt-4" type="submit">Submit</button>
+      <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
+    </form>
+  </main>
+{% endblock %}
+

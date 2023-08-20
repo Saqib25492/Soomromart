@@ -1,0 +1,42 @@
+{% extends "authentication/baseauth.html" %}
+{% block title %}
+  Login
+{% endblock title %}
+
+{% block list %}
+<li class="dropdown"><a href="/auth/signup/"><span>Sign up</span></a></li>
+{% endblock list %}
+
+{% block bodyforms %}
+<div>
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+</div>
+<div>
+  <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y- bg-light rounded" style="padding: 0 50px 0 50px;"">
+      <h1 class="text-black font-semibold  mb-6">Login</h1>
+      <form action="/auth/login/" method="post" class="my-4">
+        {% csrf_token %}
+        <div class="form-group my-2">
+          <label class="d-flex justify-content-start" for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter Your Username">
+        </div>
+
+        <div class="form-group my-4">
+          <label for="password" class="d-flex justify-content-start">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          <small class="text-black d-flex justify-content-start">Not registered? <a href="/auth/signup/" class="text-decoration-none mx-1">Register</a></small>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-4 mt-1">Login</button>
+      </form>
+  </div>
+</div>
+{% endblock bodyforms %}

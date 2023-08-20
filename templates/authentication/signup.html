@@ -1,0 +1,52 @@
+{% extends "authentication/baseauth.html" %}
+{% block title %}
+  Signup
+{% endblock title %}
+
+
+{% block list %}
+<li class="dropdown"><a href="/auth/login/"><span>Login</span></a></li>
+{% endblock list %}
+
+{% block bodyforms %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+
+<div>
+  <div class="lg:p-12 max-w-md max-w- lg:my-0 my-12 mx-auto space- bg-light rounded" style="padding: 0 50px 0 50px;">
+      <h1 class="text-black font-semibold  mb-6">Sign Up</h1>
+
+      <form action="/auth/signup/" method="post" class="my-4">
+        {% csrf_token %}
+        <div class="form-group my-4">
+          <label class="d-flex justify-content-start" for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Username">
+        </div>
+
+        <div class="form-group my-4">
+          <label class="d-flex justify-content-start" for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="example@example.com">
+        </div>
+
+        <div class="form-group my-4">
+          <label for="password" class="d-flex justify-content-start">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+
+        <div class="form-group my-4">
+          <label for="password1" class="d-flex justify-content-start">Confirm Password</label>
+          <input type="password" class="form-control" id="password1" name="password1" placeholder="Confirm Password">
+          <small class="text-black d-flex justify-content-start">Already registered? <a href="/auth/login/" class="text-decoration-none mx-1">login</a></small>
+        </div>
+        <div class="button" st></div>
+        <button type="submit" class="btn btn-primary mb-4">Sign Up</button>
+      </form>
+  </div>
+</div>
+{% endblock bodyforms %} 
