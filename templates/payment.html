@@ -1,0 +1,123 @@
+{% extends "main.html" %}
+{% block title %}
+  Payment
+{% endblock title %}
+
+{% block body %}
+<section id="portfolio" class="portfolio">
+    <div class="container">
+      {% for message in messages %}
+  
+      <div
+        class="alert alert-{{message.tags}} alert-dismissible fade show"
+        role="alert"
+      >
+        <strong>{{message}}</strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %}
+  
+      <div class="section-title">
+        <h3>Checkout Page </h3>
+      </div>
+  
+         
+         
+         <div class="container">
+             <div class="col my-4">
+                 <div class="my-4">
+                     <ul class="list-group" id="items">
+  
+                      
+                     </ul>
+         
+                     <nav aria-label="breadcrumb">
+           <ol class="breadcrumb mt-3">
+             <li class="breadcrumb-item active" aria-current="page">Pay <b>Rs. </span><span id="amount"></span></b> to confirm order</li>
+
+           </ol>
+         </nav>
+         
+         
+         
+                     
+                 </div>
+             </div>
+             <div class="col my-4">
+                 <h2>Enter Your Card Details</h2>
+                 <form action="/payment/{{order.order_id}}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="id" name="id" value = {{order.order_id}}>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputname">Name</label>
+                            <input type="text" class="form-control mt-1 mb-2" id="name" name="name" placeholder="Card Holder Name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="cardnum">Card Number</label>
+                            <input type="text" class="form-control mt-1 mb-2" id="cardnum" name="cardnum" placeholder="____ ____ ____ ____" required>
+                        </div>
+                    
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="date">Valid Through</label>
+                        <input type="date" class="form-control mt-1 mb-2" id="date" name="date" placeholder="MM/YYYY" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="CVV">CVV</label>
+                        <input type="text" class="form-control mt-1 mb-2" id="CVV" name="cvv" placeholder="***" required>
+                    </div>
+                    </div>
+                
+                    
+                    <button id="btn" type="submit" class="btn btn-success btn-sm btn-block col-md-4 mt-3">Pay</button>
+                 </form>
+             </div>
+         </div>
+     
+   <script src="https://code.jquery.com/jquery-3.3.1.js"
+   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+   crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  
+  
+
+<script>
+        if (localStorage.getItem('cart') == null) {
+           var cart = {};
+        } else {
+           cart = JSON.parse(localStorage.getItem('cart'));
+        }
+        console.log(cart);
+        
+        
+      
+        var sum = 0;
+        var totalPrice = 0;
+        if ($.isEmptyObject(cart)) {
+           //if object is empty
+           mystr = `<p>Your cart is empty, please add some items to your cart before checking out!</p>`
+           $('#items').append(mystr);
+        } else {
+           for (item in cart) {
+               let name = cart[item][1];
+               let qty = cart[item][0];
+               let itemPrice = cart[item][2];
+               sum = sum + qty;
+               totalPrice = totalPrice + qty* itemPrice;
+           }
+           document.getElementById('amount').innerHTML=totalPrice
+        
+        }
+        document.getElementById('amount').innerHTML = totalPrice;
+        localStorage.clear()
+</script>
+{% endblock body %}

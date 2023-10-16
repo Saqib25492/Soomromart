@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block title %}
+  Thanks
+{% endblock title %}
+
+{% block body %}
+<div class="section-title">
+    <h3>Thankyou for shopping. Please come again</h3>
+    <p>{{order.update_desc}}</p>
+    <p>You can use this id: {{order.order_id}} to track your order on our order tracking platform</p>
+
+</div>
+{% endblock body %}
