@@ -6,3 +6,4 @@ sqlparse==0.4.3
 typing_extensions==4.8.0
 tzdata==2022.7
 six==1.16.0
+sqllite==3.8.3
